@@ -36,6 +36,11 @@ for pos in positions:
     if local[60:68] == "flag".encode("utf8").hex():
         data = bytes.fromhex(local[68:74]).decode("ascii")
         flag_letters[int(data[0:2])] = data[2]
+    else :
+        print(bytes.fromhex(local[60: bytestring.find("504b0102", pos + 1)]))
+
+
+
 
 flag = ""
 items = list(flag_letters.items())
