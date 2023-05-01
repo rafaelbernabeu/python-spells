@@ -1,3 +1,7 @@
 *.iml
+*.png
+*.gif
 .idea
 .DS_Store
+.vscode
+training_checkpoints
