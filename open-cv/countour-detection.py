@@ -1,7 +1,4 @@
 import cv2
-import cv2_tools
-
-print('Name: {}\nVersion:{}\nHelp:{}'.format(cv2_tools.name,cv2_tools.__version__,cv2_tools.help))
 
 vid_capture = cv2.VideoCapture(1)
 

@@ -29,13 +29,6 @@ while(vid_capture.isOpened()):
         # Display Canny Edge Detection Image
         cv2.imshow('Canny Edge Detection', edges)
 
-
-
-
-
-
-
-
         k = cv2.waitKey(20)
         # 113 is ASCII code for q key
         if k == 113:
