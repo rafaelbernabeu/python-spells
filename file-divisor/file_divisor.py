@@ -22,7 +22,7 @@ with open(nomeArquivo, "rt") as fd:
     qtdLinhas = len(arquivo)
 
 nomeArquivo = nomeArquivo.split(".")[0]
-qtdColunasTotal = len(arquivo[0].split(separador))
+qtdColunasTotal = len(arquivo[0].strip().split(separador))
 qtdArquivosCriar = int(qtdColunasTotal / numColDesejado)
 resto = qtdColunasTotal % numColDesejado
 
@@ -30,31 +30,32 @@ if qtdColunasTotal == 1:
     print("Separador inválido")
     exit(1)
 
-contador = 0
+contador = 1
 numArquivo = 1
 saida = ""
 
 for linha in arquivo:
-    colunas = linha.split(separador)
+    colunas = linha.strip().split(separador)
     comprimentoOnda = colunas[0]
     ultimoItem = colunas[-1]
+    tamLinha = len(colunas) - 2
 
-    for col in colunas[1::]:
+    for idx,col in enumerate(colunas[1::]):
         saida += col + " "
         contador += 1
 
-        if ((contador == numColDesejado) | (col == ultimoItem)):
+        if (contador == numColDesejado) | ((idx == tamLinha) & (col == ultimoItem)):
             try: os.mkdir(f"{os.getcwd()}/{nomeArquivo}")
             except IOError: pass
             with open(f'{os.getcwd()}/{nomeArquivo}/{nomeArquivo}_{numArquivo:03}.txt', "at") as file:
                 file.write(comprimentoOnda + " " + saida.strip() + "\n")
-            contador = 0
+            contador = 1
             numArquivo += 1
             saida = ""
 
     numArquivo = 1
 
 
-print(f'Foram criados {qtdArquivosCriar} arquivos com {numColDesejado} colunas cada')
+print(f'Foram criados {qtdArquivosCriar} arquivos com {numColDesejado} colunas')
 if resto > 0:
-    print(f'Um arquivo com {resto} colunas restantes')
+    print(f'Um arquivo com {resto + qtdArquivosCriar - 1} colunas restantes')
